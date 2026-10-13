@@ -1,0 +1,18 @@
+schema = "vpremises://infrastructure/service-requirements/v1"
+service_id = "fixture"
+service_ref = "vpremises://service/fixture@1"
+extends = []
+
+[process]
+user = "fixture"
+execution = "service"
+bind = "127.0.0.1:4174"
+artifact = "fixture"
+
+[state]
+directory = "/var/lib/fixture"
+backup_required = true
+
+[health]
+path = "/readyz"
+timeout_seconds = 3

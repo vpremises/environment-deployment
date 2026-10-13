@@ -1,0 +1,150 @@
+{
+  "scope": "reviewed-code-and-synthetic-fixtures-only",
+  "private_history_exported": false,
+  "excluded": [
+    "profiles",
+    "automation",
+    "packaging",
+    "registration",
+    "state",
+    ".git",
+    "private documentation"
+  ],
+  "files": [
+    {
+      "destination": "crates/environment-deployment/Cargo.toml",
+      "sha256": "740f5d97316f31145d2fe1ee8f9d9b030d04220a6939ffee32e145c959e88f9d",
+      "original_sha256": "dc31b48e0e05f412d09133069c1df6303063509a3b2deae4bb7221f9f4c72ea1"
+    },
+    {
+      "destination": "crates/environment-deployment/examples/reconciliation.rs",
+      "sha256": "1158f418e939a88afa6ecd783da75ae02d8acd0cd494609c530b1a1f76e318f5",
+      "original_sha256": "43ec95ddaecd227b22aa6a38f697a711cd48df627f8644c8d097232d424f3473"
+    },
+    {
+      "destination": "crates/environment-deployment/schemas/apply-receipt-v1.schema.json",
+      "sha256": "b7d7d3bfd792820c8d3a7000918c6e0f193d0d7e48c857f811ddab220884c228",
+      "original_sha256": "b7d7d3bfd792820c8d3a7000918c6e0f193d0d7e48c857f811ddab220884c228"
+    },
+    {
+      "destination": "crates/environment-deployment/src/boundary.rs",
+      "sha256": "0be3fead28546402633265cc9244b7b0b57bd538ab8031e9d960171f9c085709",
+      "original_sha256": "0be3fead28546402633265cc9244b7b0b57bd538ab8031e9d960171f9c085709"
+    },
+    {
+      "destination": "crates/environment-deployment/src/digest.rs",
+      "sha256": "882068f6bd90e272dcced6efb5e97c302b6b608c80615914c1331171c20cfa75",
+      "original_sha256": "882068f6bd90e272dcced6efb5e97c302b6b608c80615914c1331171c20cfa75"
+    },
+    {
+      "destination": "crates/environment-deployment/src/error.rs",
+      "sha256": "628f669fcafae863ba3d65c983cf3b3d075cf7fc2bfe3cd50c231214ed228510",
+      "original_sha256": "628f669fcafae863ba3d65c983cf3b3d075cf7fc2bfe3cd50c231214ed228510"
+    },
+    {
+      "destination": "crates/environment-deployment/src/lib.rs",
+      "sha256": "492767d9cd487131342023697176680f29ac652314a7db99fb3967b3f976789d",
+      "original_sha256": "492767d9cd487131342023697176680f29ac652314a7db99fb3967b3f976789d"
+    },
+    {
+      "destination": "crates/environment-deployment/src/load.rs",
+      "sha256": "aaebb680db5385b6ebec3a12fe5f7a6cc78ab051b01ec5da61f0fa8304ca5a5d",
+      "original_sha256": "aaebb680db5385b6ebec3a12fe5f7a6cc78ab051b01ec5da61f0fa8304ca5a5d"
+    },
+    {
+      "destination": "crates/environment-deployment/src/maintenance.rs",
+      "sha256": "1d29cc309ddbe8f692e168c566b38f391c758e5e41c3497da53cdca8f4cb0283",
+      "original_sha256": "1d29cc309ddbe8f692e168c566b38f391c758e5e41c3497da53cdca8f4cb0283"
+    },
+    {
+      "destination": "crates/environment-deployment/src/model/configuration.rs",
+      "sha256": "4f7d062b0646c1d3a08ac20d27e09c3d2a1ac753f9263e60d50eeda8e3c18ff2",
+      "original_sha256": "4f7d062b0646c1d3a08ac20d27e09c3d2a1ac753f9263e60d50eeda8e3c18ff2"
+    },
+    {
+      "destination": "crates/environment-deployment/src/model/mod.rs",
+      "sha256": "daa3bce1c33121f5a3b1ad95540869affcd37904480e27445f32c26560129398",
+      "original_sha256": "daa3bce1c33121f5a3b1ad95540869affcd37904480e27445f32c26560129398"
+    },
+    {
+      "destination": "crates/environment-deployment/src/model/reconciliation.rs",
+      "sha256": "df056dd0c9053b1273db2b50c708ce22f89d92d9094562257c4fe7ab1853e6c8",
+      "original_sha256": "df056dd0c9053b1273db2b50c708ce22f89d92d9094562257c4fe7ab1853e6c8"
+    },
+    {
+      "destination": "crates/environment-deployment/src/model/resolved.rs",
+      "sha256": "f5d630d008bd119d148c2dcc6ec693421fa894eaa3d30d988be7524cf7dcd4fb",
+      "original_sha256": "f5d630d008bd119d148c2dcc6ec693421fa894eaa3d30d988be7524cf7dcd4fb"
+    },
+    {
+      "destination": "crates/environment-deployment/src/resolve.rs",
+      "sha256": "531b8fd38c5d23bb6088584a415f7ffb1846e28466d021870a5a5ff4c96f8a58",
+      "original_sha256": "531b8fd38c5d23bb6088584a415f7ffb1846e28466d021870a5a5ff4c96f8a58"
+    },
+    {
+      "destination": "crates/environment-deployment/src/state.rs",
+      "sha256": "a75c1b0e362756318a10bb81e080a7a62300fa7543a305282bdf629a1bb92f6f",
+      "original_sha256": "a75c1b0e362756318a10bb81e080a7a62300fa7543a305282bdf629a1bb92f6f"
+    },
+    {
+      "destination": "crates/environment-deployment/tests/fixtures/base.toml",
+      "sha256": "7135742133bcb798933bb8eb8d6621986d775c05d35e7a945c7c4bf4de266239",
+      "original_sha256": "7135742133bcb798933bb8eb8d6621986d775c05d35e7a945c7c4bf4de266239"
+    },
+    {
+      "destination": "crates/environment-deployment/tests/fixtures/environment.toml",
+      "sha256": "090e8841416b4e807aca1f82a7ec55210c67d4c79f77f456b18f9accdc64d54e",
+      "original_sha256": "090e8841416b4e807aca1f82a7ec55210c67d4c79f77f456b18f9accdc64d54e"
+    },
+    {
+      "destination": "crates/environment-deployment/tests/fixtures/service.toml",
+      "sha256": "10b99f3ea59515f3f2f2a13c3d4912465a4be502892ac10b6b1092a6812d014d",
+      "original_sha256": "10b99f3ea59515f3f2f2a13c3d4912465a4be502892ac10b6b1092a6812d014d"
+    },
+    {
+      "destination": "crates/environment-deployment/tests/maintenance.rs",
+      "sha256": "e479c481270a72c1d903319c21f848a5148663b494fd224587fd2e0341c8356c",
+      "original_sha256": "49f9cb6e6118ed260bd7ac675c9827afa9136f32cd3e8ea19f9555ba2aeaf062"
+    },
+    {
+      "destination": "crates/environment-deployment/tests/reconciliation.rs",
+      "sha256": "ca59def42bac4ed5aa477e91c6d55da61861f85b096d6f6c16c960aec061ef4e",
+      "original_sha256": "e1ca1a121cbf9e2a1cf6a704beef595b7ff51e0779b6ef149a8bf4a242661187"
+    },
+    {
+      "destination": "crates/incus-renderer/Cargo.toml",
+      "sha256": "4f9546c633dc538c9705289d2f589ee3eda1d2f6d535689288c31e12d510f05d",
+      "original_sha256": "3a2afb799c12e274ede0bd90682626629f6e5a8dcd647e58f56d59ca3e8ad819"
+    },
+    {
+      "destination": "crates/incus-renderer/src/lib.rs",
+      "sha256": "243f945b2844d39af8de720e8ff3a9142b02f03d917b99fa6cb668b6cbfd4dd0",
+      "original_sha256": "96517e31fe777de6f4bf34c8df063466bf28a0e9b1c37723022e44c75973a027"
+    },
+    {
+      "destination": "crates/incus-renderer/src/render.rs",
+      "sha256": "03b8c59d2f264bc98ff3032c29c128f469420488e4c4ba9967c36cf63efc3508",
+      "original_sha256": "be5b60921493b545b300165b3b6266c5324f12daceb5b35d51e55e26a0b281f7"
+    },
+    {
+      "destination": "crates/incus-renderer/src/validate.rs",
+      "sha256": "83415614366de1f3a9a7285f1a48b42f851b480a288440c7961ccaa7b9b8c7de",
+      "original_sha256": "2e4a19e72a0b43d3004924bfc31209a8f6c5d5101d5401eb36b4b4031f235cd9"
+    },
+    {
+      "destination": "crates/incus-renderer/tests/fixtures/resolved.json",
+      "sha256": "c4c311d22da382702db4da5c99319688fe38f9968fb1b27708ae444afcd2eb6f",
+      "original_sha256": "1f9d60da0413d31f4f6a433f7d6a370ca342e974e362d710f52cc72efed3f40a"
+    },
+    {
+      "destination": "crates/incus-renderer/tests/render.rs",
+      "sha256": "c3d91f24b86095313c37241a33732272b08ed7acefd1183fbfaa4bad0c0436d7",
+      "original_sha256": "c3d91f24b86095313c37241a33732272b08ed7acefd1183fbfaa4bad0c0436d7"
+    },
+    {
+      "destination": "crates/incus-renderer/tests/resolution.rs",
+      "sha256": "0cc15b8ffb054781c71556cacfe50a2afc6557a6c3b929b53980b2abd5a526ae",
+      "original_sha256": null
+    }
+  ]
+}

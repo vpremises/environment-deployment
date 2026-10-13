@@ -1,0 +1,21 @@
+name: Verify environment deployment
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - run: rustup toolchain install 1.97 --profile minimal --component rustfmt --component clippy
+      - run: cargo +1.97 fmt --all -- --check
+      - run: cargo +1.97 clippy --locked --workspace --all-targets -- -D warnings
+      - run: cargo +1.97 test --locked --workspace --all-targets
+      - run: cargo +1.97 test --locked --workspace --doc
+      - run: cargo +1.97 run --locked -p vpremises-environment-deployment --example reconciliation

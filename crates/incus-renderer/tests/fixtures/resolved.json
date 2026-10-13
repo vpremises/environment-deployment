@@ -1,0 +1,60 @@
+{
+  "schema": "vpremises://infrastructure/resolved-environment/v1",
+  "environment": {
+    "schema": "vpremises://infrastructure/environment/v1",
+    "environment_id": "fixture-primary",
+    "service_ref": "vpremises://service/fixture@1",
+    "driver": "incus",
+    "instance_type": "virtual-machine",
+    "extends": [
+      "debian-13"
+    ],
+    "resources": {
+      "cpu": 2,
+      "memory_mib": 2048,
+      "root_disk_gib": 24
+    },
+    "network": {
+      "profile": "private-service",
+      "public_listener": false
+    },
+    "maintenance": {
+      "window": "Sun 03:00-05:00 Asia/Tokyo",
+      "update_policy": "production"
+    },
+    "incus": {
+      "instance_name": "fixture-primary",
+      "project": "fixture",
+      "image": "images:debian/13/cloud",
+      "storage_pool": "default",
+      "network": "incusbr0"
+    }
+  },
+  "service": {
+    "schema": "vpremises://infrastructure/service-requirements/v1",
+    "service_id": "fixture",
+    "service_ref": "vpremises://service/fixture@1",
+    "extends": [],
+    "process": {
+      "user": "fixture",
+      "execution": "service",
+      "bind": "127.0.0.1:4174",
+      "artifact": "fixture"
+    },
+    "state": {
+      "directory": "/var/lib/fixture",
+      "backup_required": true
+    },
+    "health": {
+      "path": "/readyz",
+      "timeout_seconds": 3
+    }
+  },
+  "profiles": [
+    {
+      "profile_id": "debian-13",
+      "version": "1.0.0"
+    }
+  ],
+  "components": []
+}

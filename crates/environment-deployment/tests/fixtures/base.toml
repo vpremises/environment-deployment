@@ -1,0 +1,9 @@
+schema = "vpremises://infrastructure/profile/v1"
+profile_id = "debian-13"
+version = "1.0.0"
+
+[[components]]
+id = "os-baseline"
+kind = "operating-system"
+packages = ["ca-certificates"]
+

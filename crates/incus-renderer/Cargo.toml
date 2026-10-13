@@ -1,0 +1,27 @@
+[package]
+repository = "https://github.com/vpremises/environment-deployment"
+exclude = ["/registration/**", "/state/**", "/.local/**", "/.state/**", "/.data/**", "/secrets/**", "/credentials/**", "/.env", "/.env.production", "/.env.local", "/*.tgz", "/*.tar.gz", "/*.tar", "/*.zip", "/*.whl", "/*.crate", "/.ruff_cache/**", "/.mypy_cache/**", "/.tox/**", "/.nox/**", "/.hypothesis/**", "/.coverage", "/.coverage.*", "/htmlcov/**", "/lcov.info", "/junit.xml", "/*.profraw", "/*.profdata", "/*.egg-info/**", "/target/**", "/node_modules/**", "/dist/**", "/build/**", "/.cache/**", "/.pytest_cache/**", "/coverage/**"]
+name = "vpremises-incus-driver"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.97"
+description = "Validated OpenTofu renderer for vPremises-managed Incus instances"
+license = "Apache-2.0"
+readme = "../../README.md"
+publish = false
+
+[dependencies]
+vpremises-environment-deployment = { path = "../environment-deployment", version = "0.2.0" }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[dev-dependencies]
+toml = "0.9.8"
+
+[lints.clippy]
+all = "warn"
+pedantic = "warn"
+

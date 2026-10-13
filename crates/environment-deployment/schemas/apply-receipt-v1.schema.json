@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vpremises://infrastructure/apply-receipt/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "operation_id",
+    "environment_id",
+    "desired_digest",
+    "driver",
+    "status",
+    "changed",
+    "observed_at"
+  ],
+  "properties": {
+    "schema": { "const": "vpremises://infrastructure/apply-receipt/v1" },
+    "operation_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "environment_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "desired_digest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "driver": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "status": { "enum": ["applied", "no-op"] },
+    "changed": { "type": "boolean" },
+    "observed_at": { "type": "string", "format": "date-time" }
+  }
+}
+
