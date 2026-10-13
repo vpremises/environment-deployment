@@ -20,3 +20,5 @@ This source-only extraction contains synthetic fixtures and no private repositor
 Operator commands belong in `vpremises/environment-operations`. Actual profiles and operation data belong in private `vpremises/environment-configurations`. This library calculates plans and renders configuration; it does not connect to providers, apply plans, sign an operational catalog or enable a timer. Live execution requires a separately established authorization and deployment path.
 
 Workspace crates currently use `publish = false`; public Git source is the distribution path until a separate crates.io release has been reviewed. Configuration and receipt URIs remain identifiers for the current schema, rather than a legacy compatibility layer.
+
+[OSS responsibility and source completion](docs/oss-source-contract.md) defines the supported package boundary and required acceptance. It does not declare unexecuted source, distribution or production checks complete.

@@ -1,0 +1,124 @@
+{
+  "repository": "vpremises/environment-deployment",
+  "purpose": "Typed environment planning, reconciliation and provider rendering for vPremises",
+  "responsibility_boundary": "Own the named environment configuration/planning or application deployment composition. Generic security and provider mechanisms reuse their managed owners; real profiles/secrets and actual environment activation are separate.",
+  "packages": [
+    {
+      "manifest": "crates/environment-deployment/Cargo.toml",
+      "package": "vpremises-environment-deployment",
+      "ecosystem": "rust",
+      "description": "Typed desired-state resolver and reconciliation ledger for vPremises",
+      "interfaces": {
+        "lib": "crates/environment-deployment/src/lib.rs",
+        "features": {},
+        "bins": [],
+        "public_modules": [],
+        "public_reexports": [
+          "error::{Error, Result}",
+          "load::{load_environment, load_profile_directory, load_service}",
+          "maintenance::{\n    MaintenanceBinding, MaintenanceTimer, MaintenanceWindow, render_maintenance_timer,\n}",
+          "model::{\n    Component, Driver, Environment, Health, IncusPlacement, InstanceType, Maintenance, Network,\n    Plan, PlanAction, Process, Profile, Receipt, ResolvedEnvironment, Resources,\n    ServiceRequirements, State,\n}",
+          "resolve::resolve",
+          "state::Ledger"
+        ],
+        "implicit_bins": []
+      },
+      "declared_commands": {}
+    },
+    {
+      "manifest": "crates/incus-renderer/Cargo.toml",
+      "package": "vpremises-incus-driver",
+      "ecosystem": "rust",
+      "description": "Validated OpenTofu renderer for vPremises-managed Incus instances",
+      "interfaces": {
+        "lib": "crates/incus-renderer/src/lib.rs",
+        "features": {},
+        "bins": [],
+        "public_modules": [],
+        "public_reexports": [
+          "render::render",
+          "validate::validate",
+          "vpremises_environment_deployment::ResolvedEnvironment"
+        ],
+        "implicit_bins": []
+      },
+      "declared_commands": {}
+    }
+  ],
+  "schema_definitions": [
+    "crates/environment-deployment/schemas/apply-receipt-v1.schema.json"
+  ],
+  "test_sources": [
+    "crates/environment-deployment/src/maintenance.rs",
+    "crates/environment-deployment/tests/fixtures/base.toml",
+    "crates/environment-deployment/tests/fixtures/environment.toml",
+    "crates/environment-deployment/tests/fixtures/service.toml",
+    "crates/environment-deployment/tests/maintenance.rs",
+    "crates/environment-deployment/tests/reconciliation.rs",
+    "crates/incus-renderer/src/render.rs",
+    "crates/incus-renderer/src/validate.rs",
+    "crates/incus-renderer/tests/fixtures/resolved.json",
+    "crates/incus-renderer/tests/render.rs",
+    "crates/incus-renderer/tests/resolution.rs"
+  ],
+  "example_sources": [
+    "crates/environment-deployment/examples/reconciliation.rs"
+  ],
+  "workflow_definitions": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "jobs": [
+        {
+          "job": "verify",
+          "condition": null,
+          "runs_on": "ubuntu-24.04",
+          "steps": [
+            {
+              "name": null,
+              "run": null,
+              "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "rustup toolchain install 1.97 --profile minimal --component rustfmt --component clippy",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 fmt --all -- --check",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 clippy --locked --workspace --all-targets -- -D warnings",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 test --locked --workspace --all-targets",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 test --locked --workspace --doc",
+              "uses": null,
+              "condition": null
+            },
+            {
+              "name": null,
+              "run": "cargo +1.97 run --locked -p vpremises-environment-deployment --example reconciliation",
+              "uses": null,
+              "condition": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "evidence_policy": "Declarations and source paths are not proof of an executed acceptance. Exact CI head and result are recorded separately. No live accounts or production acceptance is inferred."
+}
