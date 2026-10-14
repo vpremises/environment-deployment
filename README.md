@@ -22,3 +22,5 @@ Operator commands belong in `vpremises/environment-operations`. Actual profiles 
 Workspace crates currently use `publish = false`; public Git source is the distribution path until a separate crates.io release has been reviewed. Configuration and receipt URIs remain identifiers for the current schema, rather than a legacy compatibility layer.
 
 [OSS responsibility and source completion](docs/oss-source-contract.md) defines the supported package boundary and required acceptance. It does not declare unexecuted source, distribution or production checks complete.
+
+Dependency updates: [repository policy](docs/dependency-updates.md).
