@@ -112,7 +112,7 @@ pub fn render_maintenance_timer(
     if binding.environment_id != *id
         || binding.desired_digest != desired_digest(desired)?
         || binding.inventory_path != format!("/etc/vpremises/inventory/{id}.ini")
-        || binding.inventory_digest != format!("{:x}", Sha256::digest(inventory))
+        || binding.inventory_digest != hex::encode(Sha256::digest(inventory))
     {
         return Err(Error::new(
             "maintenance environment, configuration or inventory mismatch",
