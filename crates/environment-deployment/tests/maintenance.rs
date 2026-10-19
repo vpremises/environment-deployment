@@ -29,7 +29,7 @@ fn binding(desired: &ResolvedEnvironment) -> MaintenanceBinding {
             "/etc/vpremises/inventory/{}.ini",
             desired.environment.environment_id
         ),
-        inventory_digest: format!("{:x}", Sha256::digest(b"reviewed-inventory")),
+        inventory_digest: hex::encode(Sha256::digest(b"reviewed-inventory")),
     }
 }
 
