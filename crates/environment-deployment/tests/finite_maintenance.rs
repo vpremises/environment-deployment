@@ -53,6 +53,7 @@ fn observation(value: char, now: i64) -> MaintenanceObservation {
 }
 fn fixture() -> (tempfile::TempDir, Ledger, MaintenancePlan, String) {
     let directory = tempfile::tempdir().unwrap();
+    fs::set_permissions(directory.path(), fs::Permissions::from_mode(0o700)).unwrap();
     let mut ledger = Ledger::open_private(directory.path().join("ledger.sqlite3")).unwrap();
     let plan = plan();
     let digest = ledger
@@ -533,6 +534,7 @@ fn closed_plan_limits_reject_unknown_fields_duplicate_steps_and_oversized_batche
 fn public_linked_or_aliased_ledger_paths_fail_without_permission_repair() {
     use std::os::unix::fs::symlink;
     let dir = tempfile::tempdir().unwrap();
+    fs::set_permissions(dir.path(), fs::Permissions::from_mode(0o700)).unwrap();
     let path = dir.path().join("ledger.sqlite3");
     fs::write(&path, b"untouched").unwrap();
     fs::set_permissions(&path, fs::Permissions::from_mode(0o644)).unwrap();
@@ -557,6 +559,7 @@ fn public_linked_or_aliased_ledger_paths_fail_without_permission_repair() {
 #[test]
 fn old_reconciliation_constructor_cannot_act_as_a_private_maintenance_ledger() {
     let dir = tempfile::tempdir().unwrap();
+    fs::set_permissions(dir.path(), fs::Permissions::from_mode(0o700)).unwrap();
     let mut ledger = Ledger::open(dir.path().join("legacy.sqlite3")).unwrap();
     let p = plan();
     assert!(ledger.approve_maintenance(&p, &p.context, 1000).is_err());
