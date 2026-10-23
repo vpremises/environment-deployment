@@ -5,6 +5,7 @@ mod digest;
 mod error;
 mod load;
 mod maintenance;
+mod maintenance_run;
 mod model;
 mod resolve;
 mod state;
@@ -13,6 +14,10 @@ pub use error::{Error, Result};
 pub use load::{load_environment, load_profile_directory, load_service};
 pub use maintenance::{
     MaintenanceBinding, MaintenanceTimer, MaintenanceWindow, render_maintenance_timer,
+};
+pub use maintenance_run::{
+    MaintenanceContext, MaintenanceObservation, MaintenancePlan, MaintenanceReservation,
+    MaintenanceRunStatus, MaintenanceStep, MaintenanceStepReceipt, maintenance_plan_digest,
 };
 pub use model::{
     Component, Driver, Environment, Health, IncusPlacement, InstanceType, Maintenance, Network,

@@ -8,7 +8,8 @@ use crate::{
 };
 
 pub struct Ledger {
-    connection: Connection,
+    pub(crate) connection: Connection,
+    pub(crate) private: bool,
 }
 
 impl Ledger {
@@ -41,7 +42,10 @@ impl Ledger {
             "INSERT OR IGNORE INTO schema_migrations(version) VALUES(1)",
             [],
         )?;
-        Ok(Self { connection })
+        Ok(Self {
+            connection,
+            private: false,
+        })
     }
 
     /// Compares the desired digest with the latest accepted receipt.
