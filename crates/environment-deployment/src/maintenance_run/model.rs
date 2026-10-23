@@ -9,6 +9,7 @@ pub struct MaintenanceContext {
     pub source_sha256: String,
     pub artifact_sha256: String,
     pub inventory_sha256: String,
+    pub desired_sha256: String,
 }
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -126,6 +127,7 @@ impl MaintenancePlan {
             &self.context.source_sha256,
             &self.context.artifact_sha256,
             &self.context.inventory_sha256,
+            &self.context.desired_sha256,
         ] {
             hash(value)?;
         }

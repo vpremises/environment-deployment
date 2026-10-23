@@ -23,6 +23,7 @@ fn plan() -> MaintenancePlan {
             source_sha256: hash('1'),
             artifact_sha256: hash('2'),
             inventory_sha256: hash('3'),
+            desired_sha256: hash('4'),
         },
         issued_at: 1000,
         expires_at: 1200,
@@ -277,14 +278,15 @@ fn revoked_or_stopped_approval_never_yields_a_reservation() {
 #[test]
 fn owner_host_source_artifact_inventory_and_digest_are_all_bound() {
     let (_dir, mut ledger, plan, digest) = fixture();
-    for field in 0..5 {
+    for field in 0..6 {
         let mut wrong = plan.context.clone();
         match field {
             0 => wrong.owner = "other-owner".into(),
             1 => wrong.host = "other-host".into(),
             2 => wrong.source_sha256 = hash('4'),
             3 => wrong.artifact_sha256 = hash('5'),
-            _ => wrong.inventory_sha256 = hash('6'),
+            4 => wrong.inventory_sha256 = hash('6'),
+            _ => wrong.desired_sha256 = hash('7'),
         }
         assert!(
             ledger
