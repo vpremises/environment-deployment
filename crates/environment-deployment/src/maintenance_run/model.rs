@@ -70,7 +70,7 @@ pub struct MaintenanceRunStatus {
     pub plan_id: String,
     pub plan_sha256: String,
     pub phase: String,
-    pub next_step: usize,
+    pub next_step: u16,
     pub revoked: bool,
     pub stopped: bool,
     pub expires_at: i64,

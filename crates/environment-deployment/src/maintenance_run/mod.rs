@@ -13,7 +13,7 @@ fn load(
     model::identifier(id)?;
     model::hash(expected)?;
     let row = tx.query_row("SELECT plan_sha256,plan_json,phase,next_step,revoked,stopped,deadline_at,active_json,observation_json FROM maintenance_runs WHERE id=?1",
-        [id], |r| Ok((r.get::<_,String>(0)?,r.get::<_,String>(1)?,r.get::<_,String>(2)?,r.get::<_,usize>(3)?,r.get::<_,bool>(4)?,r.get::<_,bool>(5)?,r.get::<_,Option<i64>>(6)?,r.get::<_,Option<String>>(7)?,r.get::<_,Option<String>>(8)?)))
+        [id], |r| Ok((r.get::<_,String>(0)?,r.get::<_,String>(1)?,r.get::<_,String>(2)?,r.get::<_,u16>(3)?,r.get::<_,bool>(4)?,r.get::<_,bool>(5)?,r.get::<_,Option<i64>>(6)?,r.get::<_,Option<String>>(7)?,r.get::<_,Option<String>>(8)?)))
         .optional()?.ok_or_else(||Error::new("maintenance plan is not approved"))?;
     let plan: MaintenancePlan = serde_json::from_str(&row.1)?;
     if row.0 != expected || maintenance_plan_digest(&plan)? != expected || plan.id != id {

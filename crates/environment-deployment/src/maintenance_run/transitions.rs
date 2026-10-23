@@ -37,7 +37,7 @@ impl Ledger {
         }
         let step = plan
             .steps
-            .get(status.next_step)
+            .get(usize::from(status.next_step))
             .ok_or_else(|| Error::new("maintenance batch already consumed"))?
             .clone();
         model::hash(&preflight.state_sha256)?;
@@ -95,8 +95,8 @@ impl Ledger {
             evidence.state_sha256 == reservation.step.after_sha256,
             evidence.state_sha256 == reservation.step.before_sha256,
         );
-        let next = status.next_step + usize::from(after);
-        let phase = if after && next == plan.steps.len() {
+        let next = status.next_step + u16::from(after);
+        let phase = if after && usize::from(next) == plan.steps.len() {
             "completed"
         } else if after && (status.revoked || status.stopped || now >= reservation.deadline_at) {
             "stopped"

@@ -85,7 +85,7 @@ fn finite_batch_preserves_every_receipt_and_stops_after_the_last_step() {
                 now + 1,
             )
             .unwrap();
-        assert_eq!(status.next_step, index + 1);
+        assert_eq!(usize::from(status.next_step), index + 1);
         assert_eq!(status.receipts.len(), index + 1);
         assert!(!status.execution_authorized);
         assert!(
