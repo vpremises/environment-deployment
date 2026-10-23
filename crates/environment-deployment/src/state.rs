@@ -8,7 +8,8 @@ use crate::{
 };
 
 pub struct Ledger {
-    connection: Connection,
+    pub(crate) connection: Connection,
+    pub(crate) private: bool,
 }
 
 impl Ledger {
@@ -19,29 +20,11 @@ impl Ledger {
     /// Returns an error when `SQLite` cannot open or migrate the file.
     pub fn open(path: impl AsRef<Path>) -> Result<Self> {
         let connection = Connection::open(path)?;
-        connection.execute_batch(
-            "PRAGMA foreign_keys = ON;
-             CREATE TABLE IF NOT EXISTS schema_migrations(
-               version INTEGER PRIMARY KEY
-             );
-             CREATE TABLE IF NOT EXISTS reconciliations(
-               operation_id TEXT PRIMARY KEY,
-               environment_id TEXT NOT NULL,
-               desired_digest TEXT NOT NULL,
-               driver TEXT NOT NULL,
-               status TEXT NOT NULL CHECK(status IN ('applied','no-op')),
-               changed INTEGER NOT NULL CHECK(changed IN (0,1)),
-               observed_at TEXT NOT NULL,
-               receipt_digest TEXT NOT NULL
-             );
-             CREATE INDEX IF NOT EXISTS reconciliations_environment
-               ON reconciliations(environment_id);",
-        )?;
-        connection.execute(
-            "INSERT OR IGNORE INTO schema_migrations(version) VALUES(1)",
-            [],
-        )?;
-        Ok(Self { connection })
+        initialize_reconciliation(&connection)?;
+        Ok(Self {
+            connection,
+            private: false,
+        })
     }
 
     /// Compares the desired digest with the latest accepted receipt.
@@ -152,5 +135,31 @@ fn validate_receipt(desired: &ResolvedEnvironment, receipt: &Receipt) -> Result<
     if receipt.status == "no-op" && receipt.changed {
         return Err(Error::new("no-op receipt cannot report a change"));
     }
+    Ok(())
+}
+
+pub(crate) fn initialize_reconciliation(connection: &Connection) -> Result<()> {
+    connection.execute_batch(
+        "PRAGMA foreign_keys = ON;
+             CREATE TABLE IF NOT EXISTS schema_migrations(
+               version INTEGER PRIMARY KEY
+             );
+             CREATE TABLE IF NOT EXISTS reconciliations(
+               operation_id TEXT PRIMARY KEY,
+               environment_id TEXT NOT NULL,
+               desired_digest TEXT NOT NULL,
+               driver TEXT NOT NULL,
+               status TEXT NOT NULL CHECK(status IN ('applied','no-op')),
+               changed INTEGER NOT NULL CHECK(changed IN (0,1)),
+               observed_at TEXT NOT NULL,
+               receipt_digest TEXT NOT NULL
+             );
+             CREATE INDEX IF NOT EXISTS reconciliations_environment
+               ON reconciliations(environment_id);",
+    )?;
+    connection.execute(
+        "INSERT OR IGNORE INTO schema_migrations(version) VALUES(1)",
+        [],
+    )?;
     Ok(())
 }

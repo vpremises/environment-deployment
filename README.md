@@ -4,7 +4,7 @@ Typed environment configuration, reconciliation planning and provider rendering 
 
 | Location | Responsibility |
 | --- | --- |
-| `crates/environment-deployment` | Closed configuration types and schema, profile resolution, desired-state digest, plan/receipt ledger and maintenance-window calculation |
+| `crates/environment-deployment` | Closed configuration types, profile resolution, desired-state digest, plan/receipt ledger, finite local maintenance lifecycle and maintenance-window calculation |
 | `crates/incus-renderer` | Incus-specific validation and OpenTofu JSON generation using the same resolved environment type |
 | `crates/environment-deployment/examples/reconciliation.rs` | Synthetic in-memory plan, receipt, replay rejection and rollback planning |
 
@@ -20,6 +20,11 @@ This source-only extraction contains synthetic fixtures and no private repositor
 Operator commands belong in `vpremises/environment-operations`. Actual profiles and operation data belong in private `vpremises/environment-configurations`. This library calculates plans and renders configuration; it does not connect to providers, apply plans, sign an operational catalog or enable a timer. Live execution requires a separately established authorization and deployment path.
 
 Workspace crates currently use `publish = false`; public Git source is the distribution path until a separate crates.io release has been reviewed. Configuration and receipt URIs remain identifiers for the current schema, rather than a legacy compatibility layer.
+
+Version 0.3.0 adds the [finite maintenance consent/readback lifecycle](docs/finite-maintenance.md).
+Private local consent does not grant provider execution authority. Unknown results
+survive restart and block renamed retries; stop/revoke and finite budgets remain
+separate from any future authorized host adapter. No timer or process is started.
 
 [OSS responsibility and source completion](docs/oss-source-contract.md) defines the supported package boundary and required acceptance. It does not declare unexecuted source, distribution or production checks complete.
 
