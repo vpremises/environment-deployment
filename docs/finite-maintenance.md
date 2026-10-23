@@ -22,6 +22,8 @@ The separate npm owner and deployment Environment approvals are not replaced.
 Maintenance methods require `Ledger::open_private` with an existing physical
 absolute 0700 parent directory belonging to the effective Unix UID. DB and
 existing SQLite sidecars must be physical 0600 single-link files of that owner.
+Ancestors must belong to root or the effective UID; shared writable ancestors
+are accepted only with the sticky bit, preventing another owner replacing the private directory.
 No directories are created and no existing permission is repaired. SQLite opens
 with NOFOLLOW, a finite busy timeout and FULL synchronous commits. Safe rustix
 only supplies effective UID; SQLite and serde/digest implementations are reused.

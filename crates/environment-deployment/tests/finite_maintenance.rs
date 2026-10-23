@@ -557,6 +557,20 @@ fn public_linked_or_aliased_ledger_paths_fail_without_permission_repair() {
 }
 
 #[test]
+fn writable_ancestor_cannot_replace_private_parent() {
+    let outer = tempfile::tempdir().unwrap();
+    fs::set_permissions(outer.path(), fs::Permissions::from_mode(0o777)).unwrap();
+    let inner = outer.path().join("private");
+    fs::create_dir(&inner).unwrap();
+    fs::set_permissions(&inner, fs::Permissions::from_mode(0o700)).unwrap();
+    let path = inner.join("ledger.sqlite3");
+    assert!(Ledger::open_private(&path).is_err());
+    assert!(!path.exists());
+    fs::set_permissions(outer.path(), fs::Permissions::from_mode(0o700)).unwrap();
+    assert!(Ledger::open_private(&path).is_ok());
+}
+
+#[test]
 fn old_reconciliation_constructor_cannot_act_as_a_private_maintenance_ledger() {
     let dir = tempfile::tempdir().unwrap();
     fs::set_permissions(dir.path(), fs::Permissions::from_mode(0o700)).unwrap();
