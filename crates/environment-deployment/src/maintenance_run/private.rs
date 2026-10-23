@@ -12,6 +12,7 @@ impl Ledger {
             path,
             rusqlite::OpenFlags::SQLITE_OPEN_READ_WRITE | rusqlite::OpenFlags::SQLITE_OPEN_NOFOLLOW,
         )?;
+        crate::state::initialize_reconciliation(&connection)?;
         connection.execute_batch("PRAGMA foreign_keys=ON; PRAGMA trusted_schema=OFF; PRAGMA synchronous=FULL; PRAGMA busy_timeout=1000;
           CREATE TABLE IF NOT EXISTS maintenance_clock(id INTEGER PRIMARY KEY CHECK(id=1), observed_at INTEGER NOT NULL);
           INSERT OR IGNORE INTO maintenance_clock VALUES(1,0);
