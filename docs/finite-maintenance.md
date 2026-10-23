@@ -37,7 +37,7 @@ enforcer can establish the external execution boundary.
 ## Immutable finite plan
 
 `vpremises://maintenance/finite-plan/v1` binds the environment, plan ID, local
-owner and host, source/artifact/inventory SHA256, validity and all ordered steps.
+owner and host, source/artifact/inventory/resolved-configuration SHA256, validity and all ordered steps.
 The product computes the digest from the closed typed structure. Unknown fields
 are refused. Approval lasts at most one hour, the complete batch has at most 300
 seconds of dispatch budget, and at most 16 uniquely named steps. A step names a

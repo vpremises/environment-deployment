@@ -37,6 +37,8 @@ impl Ledger {
 }
 
 #[cfg(unix)]
+// Keep the standard octal Unix permission boundary explicit for review.
+#[allow(clippy::verbose_bit_mask)]
 fn admit(path: &Path) -> Result<()> {
     use std::{
         fs,
@@ -64,12 +66,9 @@ fn admit(path: &Path) -> Result<()> {
                 if meta.is_file()
                     && meta.nlink() == 1
                     && meta.uid() == owner
-                    && meta.mode() & 0o077 == 0 =>
-            {
-                ()
-            }
+                    && meta.mode() & 0o077 == 0 => {}
             Ok(_) => return Err(Error::new("private ledger file boundary refused")),
-            Err(e) if e.kind() == std::io::ErrorKind::NotFound => (),
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
             Err(e) => return Err(e.into()),
         }
     }
