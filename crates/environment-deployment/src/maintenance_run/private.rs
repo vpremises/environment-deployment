@@ -59,6 +59,17 @@ fn admit(path: &Path) -> Result<()> {
             "ledger parent must be private and locally owned",
         ));
     }
+    for ancestor in parent.ancestors() {
+        let meta = fs::symlink_metadata(ancestor)?;
+        if !meta.is_dir()
+            || (meta.uid() != owner && meta.uid() != 0)
+            || (meta.mode() & 0o022 != 0 && meta.mode() & 0o1000 == 0)
+        {
+            return Err(Error::new(
+                "private ledger ancestor can be replaced by another owner",
+            ));
+        }
+    }
     for suffix in ["", "-wal", "-shm", "-journal"] {
         let mut candidate = path.as_os_str().to_os_string();
         candidate.push(suffix);
